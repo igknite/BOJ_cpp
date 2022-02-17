@@ -8,6 +8,7 @@ void mergeSort(vector<int> &arr, int start, int end);
 void merge(vector<int> &arr, int start, int mid, int end);
 void insertionSort(vector<int> &arr);
 vector<int> countingSort(vector<int> arr, int count);
+void selectionSort(vector<int>& arr);
 
 void main() {
 	vector<int> a{ 5,1,3 , 3 , 7 , 6 , 2 , 1 , 4 };
@@ -16,7 +17,7 @@ void main() {
 	 * vector<int> a{ 5, 7, 1 , 3 , 7 , 6 , 2 , 1 , 4 };
 	 * a = countingSort(a, 7);
 	 */
-	insertionSort(a);
+	selectionSort(a);
 	for (int i = 0; i < a.size(); i++) {
 		cout << a[i];
 	}
@@ -28,6 +29,20 @@ void test(vector<int> &arr) {
 	arr[0] = arr[1];
 	arr[1] = temp;
 	return;
+}
+
+void selectionSort(vector<int>& arr) {
+	int minIndex = 0;
+	int temp = 0;
+	for (int i = 0; i < arr.size(); i++) {
+		minIndex = i;
+		for (int l = i; l < arr.size(); l++) {
+			if (arr[minIndex] > arr[l]) minIndex = l;
+		}
+		temp = arr[i];
+		arr[i] = arr[minIndex];
+		arr[minIndex] = temp;
+	}
 }
 
 void insertionSort(vector<int>& arr) {
