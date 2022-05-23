@@ -11,13 +11,13 @@ vector<int> countingSort(vector<int> arr, int count);
 void selectionSort(vector<int>& arr);
 
 void main() {
-	vector<int> a{ 5,1,3 , 3 , 7 , 6 , 2 , 1 , 4 };
+	vector<int> a{ 5,2,3 , 3 , 7 , 6 , 2 , 1 , 4 };
 	/*
 	 * //counting sort 
 	 * vector<int> a{ 5, 7, 1 , 3 , 7 , 6 , 2 , 1 , 4 };
 	 * a = countingSort(a, 7);
 	 */
-	selectionSort(a);
+	insertionSort(a);
 	for (int i = 0; i < a.size(); i++) {
 		cout << a[i];
 	}
@@ -46,13 +46,17 @@ void selectionSort(vector<int>& arr) {
 }
 
 void insertionSort(vector<int>& arr) {
-	int tmp,i,j;
-	for (i = 1; i < arr.size(); i++) {
-		tmp = arr[i];
-		for (j = i - 1; j >= 0 && arr[j] > tmp; j--) {
-			arr[j + 1] = arr[j];
+	int minIndex;
+	for (int i = 0; i < arr.size(); i++) {
+		minIndex = i;
+		for (int j = i + 1; j < arr.size(); j++) {
+			if (arr[minIndex] > arr[j]) minIndex = j;
 		}
-		arr[j + 1] = tmp;
+		if (minIndex != i) {
+			int tmp = arr[i];
+			arr[i] = arr[minIndex];
+			arr[minIndex] = tmp;
+		}
 	}
 }
 vector<int> countingSort(vector<int> arr, int count) {
